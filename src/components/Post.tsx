@@ -3,6 +3,16 @@ import { pb } from '@/lib/pocketbase';
 import { formatDistance } from 'date-fns';
 import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import { Card } from './ui/card';
+import { useEffect, useState } from 'react';
+
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
+import { Badge } from "@/components/ui/badge"
 
 interface PostProps {
     post: {
@@ -20,9 +30,28 @@ interface PostProps {
 }
 
 export default function Post({ post }: PostProps) {
-    const mediaUrl = post.media
-        ? new URL(pb.files.getUrl(post, post.media)).toString()
-        : null;
+    useEffect(() => {
+        console.log('Post component mounted');
+        console.log('Post:', post);
+        return () => {
+            console.log('Post component unmounted');
+        };
+    }, [post]);
+    const [isMultipleImages, setIsMultipleImages] = useState(false);
+
+    useEffect(() => {
+        if (Array.isArray(post.media) && post.media.length > 1) {
+            setIsMultipleImages(true);
+        } else {
+            setIsMultipleImages(false);
+        }
+    }, [post.media]);
+
+    const mediaUrls = Array.isArray(post.media)
+        ? post.media.map((media) => new URL(pb.files.getUrl(post, media)).toString())
+        : post.media
+            ? [new URL(pb.files.getUrl(post, post.media)).toString()]
+            : [];
 
     const authorInitial = post.expand?.author?.name?.[0] || '?';
 
@@ -51,16 +80,42 @@ export default function Post({ post }: PostProps) {
                     </p>
                 )}
 
-                {mediaUrl && (
-                    <div className={"mt-4 border-4 border-black transform -rotate-2 overflow-hidden"}>
-                        <Image
-                            src={mediaUrl}
-                            alt="Post media"
-                            width={500}
-                            height={500}
-                            objectFit="cover"
-                            className="w-full h-auto"
-                        />
+                {mediaUrls.length > 0 && (
+                    <div className="mt-4 border-4 border-black transform -rotate-2 overflow-hidden">
+                        {isMultipleImages ? (
+                            <>
+                                <Badge className="absolute top-2 right-2 bg-white text-black border-2 border-black transform rotate-1 z-30">
+                                    {mediaUrls.length} images
+                                </Badge>
+                                <Carousel>
+                                    <CarouselContent>
+                                        {mediaUrls.map((url, index) => (
+                                            <CarouselItem key={index}>
+                                                <Image
+                                                    src={url}
+                                                    alt={`Post media ${index + 1}`}
+                                                    width={500}
+                                                    height={500}
+                                                    objectFit="cover"
+                                                    className="w-full h-auto"
+                                                />
+                                            </CarouselItem>
+                                        ))}
+                                    </CarouselContent>
+                                    <CarouselPrevious />
+                                    <CarouselNext />
+                                </Carousel>
+                            </>
+                        ) : (
+                            <Image
+                                src={mediaUrls[0]}
+                                alt="Post media"
+                                width={500}
+                                height={500}
+                                objectFit="cover"
+                                className="w-full h-auto"
+                            />
+                        )}
                     </div>
                 )}
             </div>
