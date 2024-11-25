@@ -14,6 +14,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { InfoIcon } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 
 export default function Home() {
   const { data: session } = useSession();
@@ -81,7 +82,11 @@ export default function Home() {
       </div>
 
       {session && <CreatePostForm />}
-
+      {!session && (
+        <Card className="bg-white border-2 border-black p-4 shadow-lg">
+          <p className="text-lg font-semibold text-black">Connecte toi pour poster des médias</p>
+        </Card>
+      )}
       <Suspense fallback={<div>Loading posts...</div>}>
         <PostList />
       </Suspense>

@@ -114,6 +114,11 @@ export default function NeoBrutalistNavbar() {
                                                 <SheetTitle>Friends Wall</SheetTitle>
                                             </SheetHeader>
                                             <SheetDescription>
+                                                <div className="bg-white border-4 border-black p-4 transform rotate-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                                                    <h1 className="text-lg font-bold">
+                                                        Au casou faut fermer après avoir clicker sur un lien ça se ferme pas automatiquement. Merci Cléa de l&apos;avoir fait remarquer.
+                                                    </h1>
+                                                </div>
                                                 <div className="flex flex-col space-y-4">
                                                     <Button asChild variant="outline" className="font-bold text-lg bg-white border-2 border-black rounded-none transform rotate-2 transition-transform hover:rotate-0">
                                                         <Link href="/login">
