@@ -31,6 +31,7 @@ const handler = NextAuth({
                         id: authData.record.id,
                         email: authData.record.email,
                         name: authData.record.name,
+                        verified: authData.record.verified,
                     };
                 } catch (error) {
                     console.error('Error authenticating user:', error);

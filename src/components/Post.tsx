@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/carousel"
 import { Badge } from "@/components/ui/badge"
 import { Download } from "lucide-react"
+import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 
 interface PostProps {
     post: {
@@ -100,12 +101,25 @@ const MediaRenderer = ({ url, mediaItem }: { url: string, mediaItem: string }) =
     } else if (type === 'image') {
         return (
             <div className="relative w-full pt-[100%]"> {/* Default 1:1 aspect ratio container */}
-                <Image
-                    src={url}
-                    alt="Post media"
-                    fill
-                    className="absolute top-0 left-0 w-full h-full object-contain"
-                />
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Image
+                            src={url}
+                            alt="Post media"
+                            fill
+                            className="absolute top-0 left-0 w-full h-full object-contain"
+                        />
+                    </DialogTrigger>
+                    <DialogContent>
+                        <Image
+                            src={url}
+                            alt="Post media"
+                            layout="responsive"
+                            width={1920}
+                            height={1080}
+                        />
+                    </DialogContent>
+                </Dialog>
             </div>
         );
     }
@@ -130,7 +144,7 @@ export default function Post({ post }: PostProps) {
     const authorInitial = post.expand?.author?.name?.[0] || '?';
 
     return (
-        <Card className="bg-yellow-300 p-6 rounded-none border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] lg:w-96 md:w-80 sm:w-64 flex flex-col">
+        <Card className="bg-yellow-300 p-6 rounded-none border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] lg:w-96 md:w-80 sm:w-full flex flex-col sm:justify-between">
             <div className="flex flex-col space-y-4 flex-grow">
                 <div className="flex items-start justify-between">
                     <div className="flex items-center space-x-4">
@@ -159,7 +173,7 @@ export default function Post({ post }: PostProps) {
                         {isMultipleMedia ? (
                             <>
                                 <Badge className="absolute top-2 right-2 bg-white text-black border-2 border-black transform rotate-1 z-30">
-                                    {mediaItems.length} items
+                                    {mediaItems.length} medias
                                 </Badge>
                                 <Carousel className="w-full">
                                     <CarouselContent>

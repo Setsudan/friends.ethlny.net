@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 import { pb } from '@/lib/pocketbase';
 import Image from 'next/image';
 import { ClientResponseError } from 'pocketbase';
-import { X } from 'lucide-react';
+import { X, PlusCircleIcon } from 'lucide-react';
 import { Button } from './ui/button';
 import { Alert, AlertDescription } from './ui/alert';
 import { Textarea } from './ui/textarea';
@@ -20,7 +20,11 @@ const ALLOWED_MEDIA_TYPES = {
         'image/png',
         'image/jpeg',
         'image/gif',
-        'image/jpg'
+        'image/jpg',
+        'image/bmp',
+        'image/svg+xml',
+        'image/tiff',
+        'image/x-icon'
     ],
     video: [
         'video/ogg',
@@ -29,7 +33,7 @@ const ALLOWED_MEDIA_TYPES = {
         'video/mp4',
         'video/webm',
         'video/x-flv',
-        'video/x-msvideo'
+        'video/x-msvideo',
     ]
 };
 
@@ -190,7 +194,7 @@ export default function CreatePostForm() {
             <Textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="What's on your mind?"
+                placeholder="Un ptit message pour aller avec ?"
                 className="w-full p-2 mb-4 bg-white border-2 border-black rounded-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 rows={3}
             />
@@ -234,7 +238,8 @@ export default function CreatePostForm() {
                         className="bg-white text-black border-2 border-black rounded-none hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         onClick={() => document.getElementById('media-upload')?.click()}
                     >
-                        Add Media
+                        <PlusCircleIcon className="h-6 w-6" />
+                        Ajouter une/des image(s) ou vidéo(s)
                     </Button>
                     <input
                         type="file"
@@ -245,11 +250,7 @@ export default function CreatePostForm() {
                         multiple
                     />
                     <span className="text-xs font-mono bg-white p-2 border-2 border-black">
-                        Max: 99 files, 5MB each. Supported formats:
-                        <br />
-                        Images: APNG, WebP, PNG
-                        <br />
-                        Videos: MP4, WebM, OGG, MPEG, QuickTime, FLV, AVI
+                        Max: 99 fichier, 500MB chacun.
                     </span>
                 </div>
                 <Button
@@ -257,7 +258,7 @@ export default function CreatePostForm() {
                     disabled={loading || (!content && mediaFiles.length === 0)}
                     className={`bg-blue-500 text-white px-6 py-3 rounded-none border-2 border-black font-bold text-lg transform rotate-2 transition-transform hover:rotate-0 ${loading || (!content && mediaFiles.length === 0) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
                 >
-                    {loading ? 'Posting...' : 'Post'}
+                    {loading ? 'ça s\'envoie....' : 'Publier ?'}
                 </Button>
             </div>
         </form>
