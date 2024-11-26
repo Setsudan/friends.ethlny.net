@@ -6,9 +6,10 @@ declare module "next-auth" {
     interface Session {
         user: {
             id: string;
-            name?: string | null;
             email?: string | null;
-            image?: string | null;
+            name?: string | null;
+            verified?: boolean;
+            avatar?: string | null;
         };
     }
 }
@@ -32,6 +33,7 @@ const handler = NextAuth({
                         email: authData.record.email,
                         name: authData.record.name,
                         verified: authData.record.verified,
+                        avatar: authData.record.avatar || null,
                     };
                 } catch (error) {
                     console.error('Error authenticating user:', error);
