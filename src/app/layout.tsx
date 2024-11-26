@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
-import Navbar from "@/components/NavBar";
+import Navbar from "@/components/common/navbar/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Friends Wall",
-  description: "Share moments with friends",
+  description: "Pitite application pour partager nos souvenirs de l'année",
 };
 
 export default function RootLayout({
