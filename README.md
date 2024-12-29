@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📸 Friends
 
-## Getting Started
+A social app to relive and share the highlights of the year with friends! 🎉🎥  
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ About this web app 
+This was a simple yet memorable web app designed to help groups of friends celebrate their year together. It offered a "private" space to collect and share photos and videos of cherished moments.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Features:  
+- 📂 **Shared Memories**: Users could upload and share photos and videos within their friend groups.  
+- ⏳ **Yearly Retrospective**: A collaborative gallery to reflect on the highlights of the year gone by.  
+- 🌐 **Unified Accounts**: Shared the same backend authentication system as [From Me To You](https://github.com/setsudan/fmty), making it easy to transition between apps.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack  
+- **Frontend**: Built using **Next.js**.  
+- **Backend**: Powered by **PocketBase** for user authentication and data storage (now offline).  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📜 Status  
+The app, along with its backend, is no longer active, and the repository has been archived. While it's no longer operational, the idea and memories it supported remain timeless.  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌱 Inspiration  
+This web app was about bringing people together and creating a digital scrapbook for moments worth cherishing.  
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you're inspired by the concept or interested in building something similar, feel free to connect!  
